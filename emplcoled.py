@@ -13,10 +13,10 @@ import conf as co
 
 
 def comp(d1, d2):
-    if distance.euclidian(d1,d2) > 0.7:
-        return False
-    else:
+    if distance.euclidean(d1,d2) <= 0.7:
         return True
+    else:
+        return False
 
 line = sys.stdin.readline().strip()
 
@@ -53,7 +53,9 @@ else:
             print("EVT_VISITOR_DETECTED:None:END\n")
             sys.exit()
         else: 
-            if comp(d["descriptor"],pickle.loads(m)["descriptor"]):
-                print("EVT_EMPLOYEE_DETECTED:%s:END\n" % pickle.loads(m)["id"])
+            d1 = d["descriptor"]
+            d2 = pickle.loads(m.value)["descriptor"]
+            if comp(d1,d2):
+                print("EVT_EMPLOYEE_DETECTED:%s:END\n" % pickle.loads(m.value)["id"])
                 sys.exit()
 
